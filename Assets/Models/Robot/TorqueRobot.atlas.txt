@@ -1,0 +1,195 @@
+
+TorqueRobot.png
+size: 976,459
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+body
+  rotate: true
+  xy: 146, 205
+  size: 252, 198
+  orig: 252, 198
+  offset: 0, 0
+  index: -1
+eyes_fx
+  rotate: false
+  xy: 60, 14
+  size: 57, 20
+  orig: 85, 87
+  offset: 25, 38
+  index: -1
+foot_down
+  rotate: false
+  xy: 147, 5
+  size: 97, 36
+  orig: 99, 38
+  offset: 1, 1
+  index: -1
+foot_up
+  rotate: false
+  xy: 246, 5
+  size: 97, 36
+  orig: 99, 38
+  offset: 1, 1
+  index: -1
+fxFail
+  rotate: true
+  xy: 346, 223
+  size: 234, 226
+  orig: 308, 320
+  offset: 36, 47
+  index: -1
+fxStart01
+  rotate: true
+  xy: 2, 198
+  size: 259, 142
+  orig: 288, 151
+  offset: 19, 5
+  index: -1
+fxStart02
+  rotate: false
+  xy: 815, 349
+  size: 150, 108
+  orig: 156, 122
+  offset: 3, 11
+  index: -1
+fxStart03
+  rotate: true
+  xy: 435, 4
+  size: 217, 144
+  orig: 225, 151
+  offset: 2, 2
+  index: -1
+fxStart04
+  rotate: true
+  xy: 574, 249
+  size: 208, 128
+  orig: 222, 142
+  offset: 2, 2
+  index: -1
+hand_down
+  rotate: false
+  xy: 704, 251
+  size: 84, 78
+  orig: 92, 81
+  offset: 2, 2
+  index: -1
+hand_leg_down
+  rotate: false
+  xy: 292, 45
+  size: 141, 158
+  orig: 146, 161
+  offset: 1, 2
+  index: -1
+hand_leg_up
+  rotate: false
+  xy: 2, 36
+  size: 143, 160
+  orig: 167, 165
+  offset: 22, 1
+  index: -1
+hand_leg_up_flip
+  rotate: false
+  xy: 147, 43
+  size: 143, 160
+  orig: 167, 165
+  offset: 2, 1
+  index: -1
+hand_up
+  rotate: true
+  xy: 581, 2
+  size: 89, 71
+  orig: 122, 82
+  offset: 2, 10
+  index: -1
+hand_up_decor
+  rotate: true
+  xy: 741, 3
+  size: 91, 72
+  orig: 162, 105
+  offset: 10, 7
+  index: -1
+hand_up_flip
+  rotate: true
+  xy: 876, 88
+  size: 93, 97
+  orig: 105, 123
+  offset: 3, 8
+  index: -1
+head
+  rotate: false
+  xy: 654, 5
+  size: 85, 86
+  orig: 87, 89
+  offset: 1, 2
+  index: -1
+leg_down
+  rotate: false
+  xy: 814, 252
+  size: 76, 95
+  orig: 81, 97
+  offset: 1, 1
+  index: -1
+leg_up
+  rotate: true
+  xy: 815, 5
+  size: 81, 97
+  orig: 81, 97
+  offset: 0, 0
+  index: -1
+logo_fx
+  rotate: true
+  xy: 892, 266
+  size: 81, 82
+  orig: 85, 87
+  offset: 2, 3
+  index: -1
+logo_fx_2
+  rotate: true
+  xy: 892, 183
+  size: 81, 82
+  orig: 85, 87
+  offset: 2, 3
+  index: -1
+shouder_up
+  rotate: true
+  xy: 704, 331
+  size: 126, 108
+  orig: 129, 114
+  offset: 1, 5
+  index: -1
+shoulder_down
+  rotate: false
+  xy: 701, 96
+  size: 74, 151
+  orig: 80, 161
+  offset: 4, 1
+  index: -1
+thigh_down
+  rotate: true
+  xy: 345, 8
+  size: 35, 55
+  orig: 37, 57
+  offset: 1, 1
+  index: -1
+thigh_up
+  rotate: true
+  xy: 2, 5
+  size: 29, 56
+  orig: 31, 58
+  offset: 1, 1
+  index: -1
+thruster
+  rotate: true
+  xy: 581, 93
+  size: 154, 118
+  orig: 180, 120
+  offset: 26, 0
+  index: -1
+torso
+  rotate: true
+  xy: 777, 128
+  size: 121, 97
+  orig: 136, 99
+  offset: 14, 1
+  index: -1

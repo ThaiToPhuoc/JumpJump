@@ -1,0 +1,62 @@
+
+coinTorque.png
+size: 286,288
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+coinBack
+  rotate: false
+  xy: 193, 104
+  size: 90, 90
+  orig: 93, 92
+  offset: 1, 1
+  index: -1
+coinFront
+  rotate: false
+  xy: 193, 196
+  size: 91, 90
+  orig: 93, 92
+  offset: 1, 1
+  index: -1
+coinSide
+  rotate: true
+  xy: 85, 54
+  size: 16, 90
+  orig: 18, 92
+  offset: 1, 1
+  index: -1
+coinSpin
+  rotate: false
+  xy: 193, 12
+  size: 90, 90
+  orig: 92, 92
+  offset: 1, 1
+  index: -1
+fxFlare
+  rotate: false
+  xy: 85, 180
+  size: 106, 106
+  orig: 108, 108
+  offset: 1, 1
+  index: -1
+fxLight
+  rotate: false
+  xy: 2, 18
+  size: 81, 268
+  orig: 88, 275
+  offset: 0, 3
+  index: -1
+fxRing
+  rotate: false
+  xy: 85, 72
+  size: 106, 106
+  orig: 108, 108
+  offset: 1, 1
+  index: -1
+fxStart
+  rotate: false
+  xy: 85, 2
+  size: 50, 50
+  orig: 54, 54
+  offset: 2, 2
+  index: -1

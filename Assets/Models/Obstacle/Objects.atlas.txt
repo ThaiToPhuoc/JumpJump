@@ -1,0 +1,62 @@
+
+Objects.png
+size: 301,157
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+obs1_fxlight
+  rotate: false
+  xy: 271, 2
+  size: 28, 48
+  orig: 30, 50
+  offset: 1, 1
+  index: -1
+obs2_fxlight
+  rotate: false
+  xy: 271, 2
+  size: 28, 48
+  orig: 30, 50
+  offset: 1, 1
+  index: -1
+obs1_rectange
+  rotate: true
+  xy: 2, 85
+  size: 70, 190
+  orig: 72, 192
+  offset: 1, 1
+  index: -1
+obs2_rectange
+  rotate: true
+  xy: 2, 13
+  size: 70, 111
+  orig: 72, 113
+  offset: 1, 1
+  index: -1
+obs3_blades
+  rotate: false
+  xy: 194, 52
+  size: 103, 103
+  orig: 105, 105
+  offset: 1, 1
+  index: -1
+obs3_circle
+  rotate: false
+  xy: 115, 7
+  size: 76, 76
+  orig: 78, 78
+  offset: 1, 1
+  index: -1
+obs3_fxCenter1
+  rotate: false
+  xy: 193, 13
+  size: 37, 37
+  orig: 39, 39
+  offset: 1, 1
+  index: -1
+obs3_fxCenter2
+  rotate: false
+  xy: 232, 13
+  size: 37, 37
+  orig: 39, 39
+  offset: 1, 1
+  index: -1
