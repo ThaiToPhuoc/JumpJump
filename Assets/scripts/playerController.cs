@@ -3,54 +3,93 @@ using System.Collections.Generic;
 using UnityEngine;
 using Spine.Unity;
 
-public class playerController : MonoBehaviour
-{
-    public SkeletonAnimation skeletonAnimation;
-    public AnimationReferenceAsset idle, walking;
-    private Rigidbody2D rigidbody;
-    public string currentState;
+public class playerController : MonoBehaviour{
 
-    public float speed;
-    public float movement;
+    public Rigidbody2D m_Rigidbody2D;
+
+    public SkeletonAnimation skeletonAnimation;
+
+    public BoxCollider2D boxCollider2D;
+
+    public LayerMask ground;
+
+    public LayerMask wall;
+
+    public float runSpeed = 1f;
+
+    public float jumpForce = 1f;
+
+    float horizontalMove = 0f;
+
+    bool jump = false;
+
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
-        currentState = "idle";
-        SetCharaterState(currentState);
+      
     }
 
     // Update is called once per frame
     void Update()
     {
-        move();
+        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+
+        if (Input.GetKeyDown("space"))
+        {
+            jump = true;
+        }
+
+        //Flip
+        
+        if(m_Rigidbody2D.velocity.x > 0)
+        {
+            skeletonAnimation.skeleton.FlipX = false;
+        }
+
+        if (m_Rigidbody2D.velocity.x < 0)
+        {
+            skeletonAnimation.skeleton.FlipX = true;
+
+        }
+
+        //Wall collision
+        if(wallCollisionLeft())
+        {
+            if (horizontalMove < 0)
+                horizontalMove = 0;
+        }
+
+        if (wallCollisionRight())
+        {
+            if (horizontalMove > 0)
+                horizontalMove = 0;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        Vector3 targetVelocity = new Vector2(horizontalMove, m_Rigidbody2D.velocity.y);
+        m_Rigidbody2D.velocity = targetVelocity;
+
+        if (jump && isGrounded())
+        {
+            m_Rigidbody2D.AddForce(new Vector2(0f, jumpForce));
+            jump = false;
+        }
+
     }
     
-    //Set character animation
-    public void SetAnimation(AnimationReferenceAsset animation, bool loop, float timeScale){
-        skeletonAnimation.state.SetAnimation(0, animation, loop).TimeScale = timeScale;
+    private bool isGrounded()
+    {
+        return Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0f, Vector2.down, .1f, ground);
     }
 
-    //Set character state
-    public void SetCharaterState(string state){
-        if(state.Equals("idle")){
-            SetAnimation(idle, true, 1f);
-        }
-        else if (state.Equals("walking"))
-        {
-            SetAnimation(walking, true, 1f);
-        }
+    private bool wallCollisionLeft()
+    {
+        return Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0f, Vector2.left, .1f, wall);
     }
 
-    public void move(){
-        movement = Input.GetAxis("Horizontal");
-        rigidbody.velocity = new Vector2(movement * speed, rigidbody.velocity.y);
-        if (movement != 0)
-        {
-            SetCharaterState("walking");
-        }
-        else
-        {
-            SetCharaterState("idle");
-        }
+    private bool wallCollisionRight()
+    {
+        return Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0f, Vector2.right, .1f, wall);
     }
 }
