@@ -810,7 +810,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   runSpeed: 2
-  jumpForce: 600
+  jumpForce: 400
+  idle: {fileID: 11400000, guid: cc65b2bcf8e12f146b6b1f347b57ac24, type: 2}
+  start: {fileID: 11400000, guid: aa0d38e9af6edc340870695072c5763b, type: 2}
+  walking: {fileID: 11400000, guid: ac10e99a731f8e443ae3eedd5013f376, type: 2}
+  jumping: {fileID: 11400000, guid: 9a67a7a4d4d5d0e4ba071a579c9ed557, type: 2}
+  currentState: 0
 --- !u!50 &1251931050
 Rigidbody2D:
   serializedVersion: 4
@@ -826,7 +831,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 4
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
