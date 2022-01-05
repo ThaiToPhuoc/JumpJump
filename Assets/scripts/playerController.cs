@@ -47,8 +47,18 @@ public class playerController : MonoBehaviour{
     // Update is called once per frame
     void Update()
     {
-        setCharacterState(currentState);
-        //Flip
+        switch (currentState)
+        {
+            case STATE.IDLE:
+                Idle();
+                break;
+            case STATE.WALKING:
+                Walking();
+                break;
+            case STATE.JUMPING:
+                Jumping();
+                break;
+        }
 
         if (m_Rigidbody2D.velocity.x > 0)
         {
@@ -77,7 +87,7 @@ public class playerController : MonoBehaviour{
 
     private void FixedUpdate()
     {
-        
+
     }
 
     public void setCharacterState(STATE state)
@@ -85,14 +95,17 @@ public class playerController : MonoBehaviour{
         STATE currentState = state;
         switch (currentState)
         {
+            case STATE.START:
+                setAnimation(start, false, 1f);
+                break;
             case STATE.IDLE:
-                onIdleState();
+                addAnimation(idle, true, 1f);
                 break;
             case STATE.WALKING:
-                onWalkingState();
+                setAnimation(walking, true, 1f);
                 break;
             case STATE.JUMPING:
-                onJumpingState();
+                setAnimation(jumping, true, 1f);
                 break;
         }
     }
@@ -103,59 +116,58 @@ public class playerController : MonoBehaviour{
         currentState = STATE.IDLE;
     }
 
-    void onIdleState()
+    void Idle()
     {
-        addAnimation(idle, true, 1f);
-        if (Input.GetKey("left") || Input.GetKey("right"))
+        setCharacterState(STATE.IDLE);
+        if(Input.GetKey("left") || Input.GetKey("right"))
         {
-            setAnimation(walking, true, 1f);
+            setCharacterState(STATE.WALKING);
             currentState = STATE.WALKING;
-        } 
+        }
 
         if (Input.GetKeyDown("space"))
         {
-            setAnimation(jumping, true, 1f);
-            m_Rigidbody2D.AddForce(new Vector2(0f, jumpForce));
+            jump = true;
             currentState = STATE.JUMPING;
         }
     }
 
-    void onWalkingState()
+    void Walking()
     {
         if (Input.GetKey("left") || Input.GetKey("right"))
         {
             horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
             Vector3 targetVelocity = new Vector2(horizontalMove, m_Rigidbody2D.velocity.y);
             m_Rigidbody2D.velocity = targetVelocity;
-        }   else
+        } else
         {
             currentState = STATE.IDLE;
         }
 
         if (Input.GetKeyDown("space"))
         {
-            m_Rigidbody2D.AddForce(new Vector2(0f, jumpForce));
+            jump = true;
             currentState = STATE.JUMPING;
         }
     }
 
-    void onJumpingState()
+    void Jumping()
     {
-        if (isGrounded())
+        bool fall = false;
+        if(jump)
+        {
+            setCharacterState(STATE.JUMPING);
+            m_Rigidbody2D.AddForce(new Vector2(0f, jumpForce));
+            jump = false;
+        }
+        if(m_Rigidbody2D.velocity.y < 0)
+        {
+            fall = true;
+        }
+        if(fall && isGrounded())
         {
             currentState = STATE.IDLE;
-        }
-        else
-        {
-            setAnimation(jumping, false, 1f);
-            if (Input.GetKey("left") || Input.GetKey("right"))
-            {
-                horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-                Vector3 targetVelocity = new Vector2(horizontalMove, m_Rigidbody2D.velocity.y);
-                m_Rigidbody2D.velocity = targetVelocity;
-
-            }
-        }
+        }    
     }
 
     //Set Character Animation
