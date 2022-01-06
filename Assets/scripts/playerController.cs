@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Spine.Unity;
-
+using Spine;
 public enum STATE
 {
     START, IDLE, WALKING, JUMPING, FALLING
@@ -34,6 +34,8 @@ public class playerController : MonoBehaviour{
 
     bool jump = false;
 
+    bool moving = false;
+
     //Animation
 
     public AnimationReferenceAsset idle, start, walking, jumping;
@@ -41,7 +43,19 @@ public class playerController : MonoBehaviour{
     public STATE currentState = STATE.START;
     void Start()
     {
+        skeletonAnimation.state.Complete += AnimationCompleteHandler;
         onStartState();
+    }
+
+    public void AnimationCompleteHandler(TrackEntry trackEntry)
+    {
+        switch (trackEntry.Animation.Name)
+        {
+            case "Start":
+                setCharacterState(STATE.IDLE);
+                currentState = STATE.IDLE;
+                break;
+        }
     }
 
     // Update is called once per frame
@@ -60,6 +74,8 @@ public class playerController : MonoBehaviour{
                 break;
         }
 
+        //Flip
+
         if (m_Rigidbody2D.velocity.x > 0)
         {
             skeletonAnimation.skeleton.FlipX = false;
@@ -74,32 +90,44 @@ public class playerController : MonoBehaviour{
         //Wall collision
         if (wallCollisionLeft())
         {
-            if (horizontalMove < 0)
+            if (m_Rigidbody2D.velocity.x < 0)
                 horizontalMove = 0;
         }
 
         if (wallCollisionRight())
         {
-            if (horizontalMove > 0)
+            if (m_Rigidbody2D.velocity.x < 0)
                 horizontalMove = 0;
         }
+
     }
 
     private void FixedUpdate()
     {
+        if (jump)
+        {
+            setCharacterState(STATE.JUMPING);
+            m_Rigidbody2D.AddForce(new Vector2(0f, jumpForce));
+            jump = false;
+        }
 
+        if (moving)
+        {
+            horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+            Vector3 targetVelocity = new Vector2(horizontalMove, m_Rigidbody2D.velocity.y);
+            m_Rigidbody2D.velocity = targetVelocity;
+        }
     }
 
     public void setCharacterState(STATE state)
     {
-        STATE currentState = state;
-        switch (currentState)
+        switch (state)
         {
             case STATE.START:
                 setAnimation(start, false, 1f);
                 break;
             case STATE.IDLE:
-                addAnimation(idle, true, 1f);
+                setAnimation(idle, true, 1f);
                 break;
             case STATE.WALKING:
                 setAnimation(walking, true, 1f);
@@ -112,17 +140,16 @@ public class playerController : MonoBehaviour{
 
     void onStartState()
     {
-        setAnimation(start, false, 1f);
-        currentState = STATE.IDLE;
+        setCharacterState(STATE.START);
     }
 
     void Idle()
     {
-        setCharacterState(STATE.IDLE);
         if(Input.GetKey("left") || Input.GetKey("right"))
         {
             setCharacterState(STATE.WALKING);
             currentState = STATE.WALKING;
+            moving = true;
         }
 
         if (Input.GetKeyDown("space"))
@@ -134,14 +161,12 @@ public class playerController : MonoBehaviour{
 
     void Walking()
     {
-        if (Input.GetKey("left") || Input.GetKey("right"))
+        
+        if (!(Input.GetKey("left") || Input.GetKey("right")))
         {
-            horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-            Vector3 targetVelocity = new Vector2(horizontalMove, m_Rigidbody2D.velocity.y);
-            m_Rigidbody2D.velocity = targetVelocity;
-        } else
-        {
+            setCharacterState(STATE.IDLE);
             currentState = STATE.IDLE;
+            moving = false;
         }
 
         if (Input.GetKeyDown("space"))
@@ -154,18 +179,14 @@ public class playerController : MonoBehaviour{
     void Jumping()
     {
         bool fall = false;
-        if(jump)
-        {
-            setCharacterState(STATE.JUMPING);
-            m_Rigidbody2D.AddForce(new Vector2(0f, jumpForce));
-            jump = false;
-        }
         if(m_Rigidbody2D.velocity.y < 0)
         {
             fall = true;
         }
         if(fall && isGrounded())
         {
+            moving = false;
+            setCharacterState(STATE.IDLE);
             currentState = STATE.IDLE;
         }    
     }
