@@ -36,9 +36,11 @@ public class playerController : MonoBehaviour{
 
     bool moving = false;
 
+    bool fall = false;
+
     //Animation
 
-    public AnimationReferenceAsset idle, start, walking, jumping;
+    public AnimationReferenceAsset idle, start, walking, jumping, falling;
 
     public STATE currentState = STATE.START;
     void Start()
@@ -52,8 +54,8 @@ public class playerController : MonoBehaviour{
         switch (trackEntry.Animation.Name)
         {
             case "Start":
-                setCharacterState(STATE.IDLE);
                 currentState = STATE.IDLE;
+                setCharacterState(currentState);
                 break;
         }
     }
@@ -76,37 +78,24 @@ public class playerController : MonoBehaviour{
 
         //Flip
 
-        if (m_Rigidbody2D.velocity.x > 0)
+        if (Input.GetKeyDown("right"))
         {
             skeletonAnimation.skeleton.FlipX = false;
         }
 
-        if (m_Rigidbody2D.velocity.x < 0)
+        if (Input.GetKeyDown("left"))
         {
             skeletonAnimation.skeleton.FlipX = true;
 
         }
-
-        //Wall collision
-        if (wallCollisionLeft())
-        {
-            if (m_Rigidbody2D.velocity.x < 0)
-                horizontalMove = 0;
-        }
-
-        if (wallCollisionRight())
-        {
-            if (m_Rigidbody2D.velocity.x < 0)
-                horizontalMove = 0;
-        }
-
     }
 
     private void FixedUpdate()
     {
+
         if (jump)
         {
-            setCharacterState(STATE.JUMPING);
+            setCharacterState(currentState);
             m_Rigidbody2D.AddForce(new Vector2(0f, jumpForce));
             jump = false;
         }
@@ -117,6 +106,20 @@ public class playerController : MonoBehaviour{
             Vector3 targetVelocity = new Vector2(horizontalMove, m_Rigidbody2D.velocity.y);
             m_Rigidbody2D.velocity = targetVelocity;
         }
+        //Wall collision
+        if (wallCollisionLeft())
+        {
+            if (m_Rigidbody2D.velocity.x < 0)
+                horizontalMove = 0;
+        }
+
+        if (wallCollisionRight())
+        {
+            if (m_Rigidbody2D.velocity.x > 0)
+                horizontalMove = 0;
+            Debug.Log("Cham tuong");
+        }
+
     }
 
     public void setCharacterState(STATE state)
@@ -140,15 +143,15 @@ public class playerController : MonoBehaviour{
 
     void onStartState()
     {
-        setCharacterState(STATE.START);
+        setCharacterState(currentState);
     }
 
     void Idle()
     {
         if(Input.GetKey("left") || Input.GetKey("right"))
         {
-            setCharacterState(STATE.WALKING);
             currentState = STATE.WALKING;
+            setCharacterState(currentState);
             moving = true;
         }
 
@@ -161,33 +164,40 @@ public class playerController : MonoBehaviour{
 
     void Walking()
     {
-        
+        fall = false;
+
+        if (m_Rigidbody2D.velocity.y < 0)
+        {
+            fall = true;
+        }
+
         if (!(Input.GetKey("left") || Input.GetKey("right")))
         {
-            setCharacterState(STATE.IDLE);
             currentState = STATE.IDLE;
+            setCharacterState(currentState);
             moving = false;
         }
 
         if (Input.GetKeyDown("space"))
         {
             jump = true;
+            moving = false;
             currentState = STATE.JUMPING;
         }
     }
 
     void Jumping()
     {
-        bool fall = false;
-        if(m_Rigidbody2D.velocity.y < 0)
+        fall = false;
+        if (m_Rigidbody2D.velocity.y < 0)
         {
             fall = true;
         }
-        if(fall && isGrounded())
+        if (fall && isGrounded())
         {
             moving = false;
-            setCharacterState(STATE.IDLE);
             currentState = STATE.IDLE;
+            setCharacterState(currentState);
         }    
     }
 
