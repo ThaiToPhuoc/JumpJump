@@ -5,12 +5,13 @@ using Spine.Unity;
 using Spine;
 public enum STATE
 {
-    START, IDLE, WALKING, JUMPING, FALLING
+    START, IDLE, WALKING, JUMPING, FALLING, DEATH
 }
 
 public class playerController : MonoBehaviour{
 
     //component
+    public Transform camera;
 
     public Rigidbody2D m_Rigidbody2D;
 
@@ -40,7 +41,7 @@ public class playerController : MonoBehaviour{
 
     //Animation
 
-    public AnimationReferenceAsset idle, start, walking, jumping, falling;
+    public AnimationReferenceAsset idle, start, walking, jumping, falling, death;
 
     public STATE currentState = STATE.START;
     void Start()
@@ -73,6 +74,8 @@ public class playerController : MonoBehaviour{
                 break;
             case STATE.JUMPING:
                 Jumping();
+                break;
+            case STATE.DEATH:
                 break;
         }
 
@@ -137,6 +140,9 @@ public class playerController : MonoBehaviour{
                 break;
             case STATE.JUMPING:
                 setAnimation(jumping, true, 1f);
+                break;
+            case STATE.DEATH:
+                setAnimation(death, false, 1f);
                 break;
         }
     }
