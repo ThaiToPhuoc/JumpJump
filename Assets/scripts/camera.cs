@@ -16,7 +16,7 @@ public class camera : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if(robot.position.y >= transform.position.y)
         {

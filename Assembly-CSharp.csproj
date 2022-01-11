@@ -53,11 +53,12 @@
     <UnityVersion>2020.3.21f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\scripts\Wall.cs" />
+    <Compile Include="Assets\scripts\camera.cs" />
     <Compile Include="Assets\CharacterController2D.cs" />
     <Compile Include="Assets\scripts\playerController.cs" />
+    <Compile Include="Assets\scripts\platformRow.cs" />
     <Compile Include="Assets\scripts\platform.cs" />
-    <Compile Include="Assets\scripts\camera.cs" />
-    <Compile Include="Assets\scripts\Wall.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Spine\version.txt" />

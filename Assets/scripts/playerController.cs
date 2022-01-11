@@ -120,7 +120,6 @@ public class playerController : MonoBehaviour{
         {
             if (m_Rigidbody2D.velocity.x > 0)
                 horizontalMove = 0;
-            Debug.Log("Cham tuong");
         }
 
     }
