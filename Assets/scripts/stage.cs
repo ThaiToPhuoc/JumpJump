@@ -10,7 +10,7 @@ public class stage : MonoBehaviour
 
     private float stageHeight;
 
-    private float rowGap = 1.5f;
+    private float rowGap = 1.4f;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,11 +41,9 @@ public class stage : MonoBehaviour
         float positionY = -(stageHeight / 2f) + rowGap;
         for (int i = 0; i < platformRowCount; i++)
         {
-            platformRows.Add(Instantiate(platformRowPrefab, new Vector3(0, 0, 0), Quaternion.identity));
+            platformRows.Add(Instantiate(platformRowPrefab, new Vector3(0, positionY, 0), Quaternion.identity));
             platformRows[i].transform.SetParent(transform);
-            platformRows[i].transform.position = new Vector3(0, positionY, 0);
-            MOVE_DIRECTION direction = (i % 2 == 0) ? MOVE_DIRECTION.RIGHT : MOVE_DIRECTION.LEFT;
-            platformRows[i].createPlatform(direction);
+            platformRows[i].createPlatform((i % 2 == 0) ? MOVE_DIRECTION.RIGHT : MOVE_DIRECTION.LEFT);
             positionY += rowGap;
         }
     }

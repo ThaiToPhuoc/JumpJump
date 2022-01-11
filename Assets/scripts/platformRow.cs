@@ -24,7 +24,8 @@ public class platformRow : MonoBehaviour
     void Start()
     {
         rowWidth = (ActualResolutionWidth(Camera.main.orthographicSize) / 100f);
-        gap = Random.Range(1f, 2.5f);
+        gap = Random.Range(1.5f, 2.2f);
+        speed = Random.Range(0.8f, 1.6f);
         createPlatform(direction);
     }
 
