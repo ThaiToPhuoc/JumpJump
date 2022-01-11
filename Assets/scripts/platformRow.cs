@@ -17,8 +17,6 @@ public class platformRow : MonoBehaviour
     public float gap;
 
     public MOVE_DIRECTION direction;
-
-    public Transform bottom, top;
          
     // Start is called before the first frame update
     void Start()
@@ -29,25 +27,7 @@ public class platformRow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch (direction)
-        {
-            case MOVE_DIRECTION.RIGHT:
-                for (int i = 0; i < platforms.Count; i++)
-                {
-                    platforms[i].transform.position += speed * Time.deltaTime * Vector3.right;
-                    if (platforms[i].transform.position.x > 3f)
-                        platforms[i].transform.position = new Vector3(-4.4f, transform.position.y);
-                }
-                break;
-            case MOVE_DIRECTION.LEFT:
-                for (int i = 0; i < platforms.Count; i++)
-                {
-                    platforms[i].transform.position += speed * Time.deltaTime * Vector3.left;
-                    if (platforms[i].transform.position.x < -3f)
-                        platforms[i].transform.position = new Vector3(3f, transform.position.y);
-                }
-                break;
-        }
+        movingPlatform();
     }
 
     public int ActualResolutionWidth(float orthoSize)
@@ -73,4 +53,27 @@ public class platformRow : MonoBehaviour
             positionX += gap;
         }
 ;   }
+
+    private void movingPlatform()
+    {
+        switch (direction)
+        {
+            case MOVE_DIRECTION.RIGHT:
+                for (int i = 0; i < platforms.Count; i++)
+                {
+                    platforms[i].transform.position += speed * Time.deltaTime * Vector3.right;
+                    if (platforms[i].transform.position.x > 3f)
+                        platforms[i].transform.position = new Vector3(-4.4f, transform.position.y);
+                }
+                break;
+            case MOVE_DIRECTION.LEFT:
+                for (int i = 0; i < platforms.Count; i++)
+                {
+                    platforms[i].transform.position += speed * Time.deltaTime * Vector3.left;
+                    if (platforms[i].transform.position.x < -3f)
+                        platforms[i].transform.position = new Vector3(3f, transform.position.y);
+                }
+                break;
+        }
+    }
 }
