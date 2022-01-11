@@ -25,7 +25,7 @@ public class platformRow : MonoBehaviour
     {
         rowWidth = (ActualResolutionWidth(Camera.main.orthographicSize) / 100f);
         gap = Random.Range(1f, 2.5f);
-        setPlatform();
+        createPlatform(direction);
     }
 
     // Update is called once per frame
@@ -44,9 +44,10 @@ public class platformRow : MonoBehaviour
         return (int)(orthoSize * 2.0 * 100);
     }
 
-    private void setPlatform()
+    public void createPlatform(MOVE_DIRECTION direction)
     {
-        int platformCount = (int)(rowWidth / gap) + 1;
+        this.direction = direction;
+        int platformCount = (int)(rowWidth / gap) + 3;
         rowWidth = platformCount * gap;
         float positionX = - rowWidth / 2f;
         for(int i = 0; i < platformCount; i ++)
@@ -74,8 +75,8 @@ public class platformRow : MonoBehaviour
                 for (int i = 0; i < platforms.Count; i++)
                 {
                     platforms[i].transform.position += speed * Time.deltaTime * Vector3.left;
-                    if (platforms[i].transform.position.x < -rowWidth)
-                        platforms[i].transform.position = new Vector3(rowWidth, transform.position.y);
+                    if (platforms[i].transform.position.x < -rowWidth/2)
+                        platforms[i].transform.position = new Vector3(rowWidth/2, transform.position.y);
                 }
                 break;
         }

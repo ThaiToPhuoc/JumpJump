@@ -59,6 +59,7 @@
     <Compile Include="Assets\scripts\playerController.cs" />
     <Compile Include="Assets\scripts\platformRow.cs" />
     <Compile Include="Assets\scripts\platform.cs" />
+    <Compile Include="Assets\scripts\stage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Spine\version.txt" />
