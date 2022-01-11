@@ -14,14 +14,18 @@ public class platformRow : MonoBehaviour
 
     public Transform platformPrefab;
 
-    public float gap;
-
     public MOVE_DIRECTION direction;
-         
+
+    private float rowWidth;
+
+    private float gap;
+
     // Start is called before the first frame update
     void Start()
     {
-       setPlatform();
+        rowWidth = (ActualResolutionWidth(Camera.main.orthographicSize) / 100f);
+        gap = Random.Range(1f, 2.5f);
+        setPlatform();
     }
 
     // Update is called once per frame
@@ -42,9 +46,9 @@ public class platformRow : MonoBehaviour
 
     private void setPlatform()
     {
-        int platformRowWidth = (ActualResolutionWidth(Camera.main.orthographicSize) / 100) + 2;
-        int platformCount = (int)(platformRowWidth / gap) + 1;
-        float positionX = - platformRowWidth / 2f;
+        int platformCount = (int)(rowWidth / gap) + 1;
+        rowWidth = platformCount * gap;
+        float positionX = - rowWidth / 2f;
         for(int i = 0; i < platformCount; i ++)
         {
             platforms.Add(Instantiate(platformPrefab, new Vector3(0, transform.position.y, 0), Quaternion.identity));
@@ -62,16 +66,16 @@ public class platformRow : MonoBehaviour
                 for (int i = 0; i < platforms.Count; i++)
                 {
                     platforms[i].transform.position += speed * Time.deltaTime * Vector3.right;
-                    if (platforms[i].transform.position.x > 3f)
-                        platforms[i].transform.position = new Vector3(-4.4f, transform.position.y);
+                    if (platforms[i].transform.position.x > rowWidth/2)
+                        platforms[i].transform.position = new Vector3(-rowWidth / 2, transform.position.y);
                 }
                 break;
             case MOVE_DIRECTION.LEFT:
                 for (int i = 0; i < platforms.Count; i++)
                 {
                     platforms[i].transform.position += speed * Time.deltaTime * Vector3.left;
-                    if (platforms[i].transform.position.x < -3f)
-                        platforms[i].transform.position = new Vector3(3f, transform.position.y);
+                    if (platforms[i].transform.position.x < -rowWidth)
+                        platforms[i].transform.position = new Vector3(rowWidth, transform.position.y);
                 }
                 break;
         }

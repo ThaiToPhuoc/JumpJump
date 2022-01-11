@@ -1208,8 +1208,6 @@ MonoBehaviour:
   platformPrefab: {fileID: 3813298716030859015, guid: bae714129e5c05441b36c96dd635dd2b, type: 3}
   gap: 1.5
   direction: 1
-  bottom: {fileID: 1923468138}
-  top: {fileID: 125529102}
 --- !u!1 &1839361451
 GameObject:
   m_ObjectHideFlags: 0
