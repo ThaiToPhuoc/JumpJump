@@ -25,14 +25,13 @@ public class platformRow : MonoBehaviour
     {
         rowWidth = (ActualResolutionWidth(Camera.main.orthographicSize) / 100f);
         gap = Random.Range(1.5f, 2.2f);
-        speed = Random.Range(0.8f, 1.6f);
         createPlatform(direction);
     }
 
     // Update is called once per frame
     void Update()
     {
-        movingPlatform();
+        movingPlatform(speed);
     }
 
     public int ActualResolutionWidth(float orthoSize)
@@ -60,7 +59,7 @@ public class platformRow : MonoBehaviour
         }
 ;   }
 
-    private void movingPlatform()
+    private void movingPlatform(float speed)
     {
         switch (direction)
         {
@@ -81,5 +80,10 @@ public class platformRow : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    public void setSpeed(float speed)
+    {
+        this.speed = speed * Random.Range(speed * 0.8f, speed * 1.6f);
     }
 }
