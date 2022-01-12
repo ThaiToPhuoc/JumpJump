@@ -12,7 +12,7 @@ public class camera : MonoBehaviour
 
     public float currentStage = 0f;
 
-    public int stageLevel = 1;
+    public int stageLevel = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +32,6 @@ public class camera : MonoBehaviour
         if (transform.position.y > currentStage + Gamedata.instance.rowHeigth * 1.5f)
         {
             currentStage += Gamedata.instance.rowHeigth;
-            Debug.Log("Xoa stage " + stageLevel + ", bottom: " + (currentStage - Gamedata.instance.rowHeigth/2));
             stageLevel++;
         }
     }

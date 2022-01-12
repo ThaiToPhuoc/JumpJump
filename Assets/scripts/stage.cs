@@ -55,4 +55,9 @@ public class stage : MonoBehaviour
     {
         this.speed = speed;
     }
+
+    public void destroyStage()
+    {
+        Destroy(this);
+    }    
 }

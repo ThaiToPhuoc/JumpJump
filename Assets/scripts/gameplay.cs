@@ -8,9 +8,11 @@ public class gameplay : MonoBehaviour
 
     public stage stageprefab_1;
 
-    private stage currentStage;
+    public Transform camera;
 
-    public Transform robot;
+    private float positionY = 0f;
+
+    private int currentLevel = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,19 +22,31 @@ public class gameplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(camera.transform.position.y > currentLevel * Gamedata.instance.rowHeigth)
+        {
+            updateStage();
+            currentLevel++;
+        }
     }
 
     private void createStages()
     {
-        float positionY = 0f;
         for (int i = 0; i < 3; i++)
         {
             stages.Add(Instantiate(stageprefab_1, new Vector3(0,positionY,0), Quaternion.identity));
             stages[i].transform.SetParent(transform);
-            stages[i].setSpeed(1f);
-            positionY = positionY + Gamedata.instance.rowHeigth;
+            positionY += Gamedata.instance.rowHeigth;
         }
     }
 
+    private void updateStage()
+    {
+        var stage1 = stages[0];
+        stages.Remove(stages[0]);
+        stages.Add(Instantiate(stageprefab_1, new Vector3(0, positionY, 0), Quaternion.identity));
+        stages[2].transform.SetParent(transform);
+        positionY += Gamedata.instance.rowHeigth;
+
+        Destroy(stage1.gameObject);
+    }    
 }

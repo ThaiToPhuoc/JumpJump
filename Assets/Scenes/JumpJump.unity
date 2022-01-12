@@ -486,7 +486,8 @@ MonoBehaviour:
   robot: {fileID: 1251931048}
   smoothspeed: 0.125
   offset: {x: 0, y: 0, z: -10}
-  bottom: {fileID: 1923468138}
+  currentStage: 0
+  stageLevel: 1
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1176,6 +1177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stages: []
   stageprefab_1: {fileID: 2101865648287005647, guid: 8b7c56e330d6faa478e8554fbf3b309b, type: 3}
+  camera: {fileID: 519420032}
   robot: {fileID: 1251931048}
 --- !u!1 &1839361451
 GameObject:
