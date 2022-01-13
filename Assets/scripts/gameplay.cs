@@ -12,7 +12,9 @@ public class gameplay : MonoBehaviour
 
     private float positionY = 0f;
 
-    private int currentLevel = 1;
+    private int currentPosition = 1;
+    private int currentStageLevel = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,10 +24,11 @@ public class gameplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(camera.transform.position.y > currentLevel * Gamedata.instance.rowHeigth)
+        if (camera.transform.position.y > currentPosition * Gamedata.instance.stageHeigth)
         {
+            currentStageLevel++;
             updateStage();
-            currentLevel++;
+            currentPosition++;
         }
     }
 
@@ -34,8 +37,10 @@ public class gameplay : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             stages.Add(Instantiate(stageprefab_1, new Vector3(0,positionY,0), Quaternion.identity));
+            stages[i].setStageLevel(currentStageLevel);
             stages[i].transform.SetParent(transform);
-            positionY += Gamedata.instance.rowHeigth;
+            positionY += Gamedata.instance.stageHeigth;
+            currentStageLevel++;
         }
     }
 
@@ -44,9 +49,9 @@ public class gameplay : MonoBehaviour
         var stage1 = stages[0];
         stages.Remove(stages[0]);
         stages.Add(Instantiate(stageprefab_1, new Vector3(0, positionY, 0), Quaternion.identity));
+        stages[2].setStageLevel(currentStageLevel);
         stages[2].transform.SetParent(transform);
-        positionY += Gamedata.instance.rowHeigth;
-
+        positionY += Gamedata.instance.stageHeigth;
         Destroy(stage1.gameObject);
     }    
 }

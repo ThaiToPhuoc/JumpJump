@@ -25,6 +25,8 @@ public class playerController : MonoBehaviour{
 
     public LayerMask wall;
 
+    public LayerMask bottom;
+
     //Properties
 
     public float runSpeed = 1f;
@@ -41,7 +43,7 @@ public class playerController : MonoBehaviour{
 
     //Animation
 
-    public AnimationReferenceAsset idle, start, walking, jumping, falling, death;
+    public AnimationReferenceAsset idle, start, walking, jumping, death;
 
     public STATE currentState = STATE.START;
     void Start()
@@ -75,21 +77,21 @@ public class playerController : MonoBehaviour{
             case STATE.JUMPING:
                 Jumping();
                 break;
-            case STATE.DEATH:
-                break;
         }
 
         //Flip
-
-        if (Input.GetKeyDown("right"))
+        if(!isDeath())
         {
-            skeletonAnimation.skeleton.FlipX = false;
-        }
+            if (Input.GetKeyDown("right"))
+            {
+                skeletonAnimation.skeleton.FlipX = false;
+            }
 
-        if (Input.GetKeyDown("left"))
-        {
-            skeletonAnimation.skeleton.FlipX = true;
+            if (Input.GetKeyDown("left"))
+            {
+                skeletonAnimation.skeleton.FlipX = true;
 
+            }
         }
     }
 
@@ -146,6 +148,12 @@ public class playerController : MonoBehaviour{
         }
     }
 
+    void gameover()
+    {
+        currentState = STATE.DEATH;
+        setCharacterState(currentState);
+        Debug.Log("GAMEOVER!");
+    }
     void onStartState()
     {
         setCharacterState(currentState);
@@ -153,6 +161,7 @@ public class playerController : MonoBehaviour{
 
     void Idle()
     {
+        fall = false;
         if(Input.GetKey("left") || Input.GetKey("right"))
         {
             currentState = STATE.WALKING;
@@ -165,16 +174,16 @@ public class playerController : MonoBehaviour{
             jump = true;
             currentState = STATE.JUMPING;
         }
+
+
+        if (isDeath())
+        {
+            gameover();
+        }
     }
 
     void Walking()
     {
-        fall = false;
-
-        if (m_Rigidbody2D.velocity.y < 0)
-        {
-            fall = true;
-        }
 
         if (!(Input.GetKey("left") || Input.GetKey("right")))
         {
@@ -188,6 +197,11 @@ public class playerController : MonoBehaviour{
             jump = true;
             moving = false;
             currentState = STATE.JUMPING;
+        }
+
+        if(isDeath())
+        {
+            gameover();
         }
     }
 
@@ -203,7 +217,12 @@ public class playerController : MonoBehaviour{
             moving = false;
             currentState = STATE.IDLE;
             setCharacterState(currentState);
-        }    
+        }
+
+        if (isDeath())
+        {
+            gameover();
+        }
     }
 
     //Set Character Animation
@@ -230,6 +249,11 @@ public class playerController : MonoBehaviour{
     private bool wallCollisionRight()
     {
         return Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0f, Vector2.right, .1f, wall);
+    }
+
+    private bool isDeath()
+    {
+        return Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0f, Vector2.down, .1f, bottom);
     }
 
 }

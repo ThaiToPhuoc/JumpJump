@@ -14,18 +14,25 @@ public class platformRow : MonoBehaviour
 
     public Transform platformPrefab;
 
+    public Transform coinPrefab;
+
+    public Transform sawPrefab;
+
+    public Transform wallPrefab;
+
     public MOVE_DIRECTION direction;
 
     private float rowWidth;
 
-    private float gap;
+    private float gap = 2f;
+
+    private int level;
 
     // Start is called before the first frame update
     void Start()
     {
         rowWidth = (ActualResolutionWidth(Camera.main.orthographicSize) / 100f);
-        gap = Random.Range(1.5f, 2.2f);
-        createPlatform(direction);
+        createPlatform();
     }
 
     // Update is called once per frame
@@ -44,19 +51,18 @@ public class platformRow : MonoBehaviour
         return (int)(orthoSize * 2.0 * 100);
     }
 
-    public void createPlatform(MOVE_DIRECTION direction)
+    public void createPlatform()
     {
-        this.direction = direction;
         int platformCount = (int)(rowWidth / gap) + 3;
         rowWidth = platformCount * gap;
         float positionX = - rowWidth / 2f;
         for(int i = 0; i < platformCount; i ++)
         {
-            platforms.Add(Instantiate(platformPrefab, new Vector3(0, transform.position.y, 0), Quaternion.identity));
+            platforms.Add(Instantiate(platformPrefab, new Vector3(positionX, transform.position.y, 0), Quaternion.identity));
             platforms[i].transform.SetParent(transform);
-            platforms[i].transform.position = new Vector3(positionX, transform.position.y, 0);
             positionX += gap;
         }
+        customPlatform();
 ;   }
 
     private void movingPlatform(float speed)
@@ -82,8 +88,59 @@ public class platformRow : MonoBehaviour
         }
     }
 
-    public void setSpeed(float speed)
+    private float[,] getData()
     {
-        this.speed = speed * Random.Range(speed * 0.8f, speed * 1.6f);
+        if (this.level < 30)
+        {
+            return Gamedata.instance.levelData[this.level];
+        }
+        else
+        {
+            return Gamedata.instance.levelData[20 + (this.level % 10)];
+        }
+    }
+
+    private void customPlatform()
+    {
+        var data = getData();
+        int r = Random.Range(0, 3);
+        this.speed = Random.Range(data[r,0], data[r, 0] + 0.5f);
+        this.gap = Random.Range(data[r, 1]/100 + 0.5f, data[r, 1] + 1f);
+
+        int Coin = Random.Range(-2, 3);
+        int Wall = Random.Range(-2, 3);
+        int Saw = Random.Range(-2, 3);
+        if(data[r,2] == 1)
+        {
+            placeCoin(Coin);
+        }
+        if (data[r, 3] == 1)
+        {
+            placeWall(Wall);
+        }
+        if (data[r, 4] == 1)
+        {
+            placeSaw(Saw);
+        }
+    }
+
+    private void placeCoin(int Coin)
+    {
+        Instantiate(coinPrefab, new Vector3(Coin * 1.5f, transform.position.y + 0.6f, 0), Quaternion.identity);
+    }
+
+    private void placeSaw(int Saw)
+    {
+        Instantiate(sawPrefab, new Vector3(Saw * 2.5f, transform.position.y + 0.6f, 0), Quaternion.identity);
+    }
+
+    private void placeWall(int Wall)
+    {
+        Instantiate(wallPrefab, new Vector3(Wall * 1.5f, transform.position.y + 0.6f, 0), Quaternion.identity);
+    }
+    public void setLevel(int level)
+    {
+        this.level = level;
+        this.direction = ((level) % 2 == 0) ? MOVE_DIRECTION.RIGHT : MOVE_DIRECTION.LEFT;
     }
 }

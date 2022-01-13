@@ -29,9 +29,4 @@ public class platform : MonoBehaviour
     {
         collision.transform.SetParent(null);
     }
-
-    public float getWidth()
-    {
-        return collider.bounds.size.x;
-    }
 }

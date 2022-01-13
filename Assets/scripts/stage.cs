@@ -13,11 +13,13 @@ public class stage : MonoBehaviour
     private float rowGap = 1.25f;
 
     public float speed = 1f;
+
+    private int stageLevel;
     // Start is called before the first frame update
     void Start()
     {
-        stageHeight = ActualResolutionHeight(Camera.main.orthographicSize)/100f;
-        createStage(); 
+        stageHeight = Gamedata.instance.stageHeigth;
+        createStage();
     }
 
     // Update is called once per frame
@@ -38,26 +40,19 @@ public class stage : MonoBehaviour
 
     public void createStage()
     {
-        int platformRowCount = (int)(stageHeight / rowGap);
-        stageHeight = platformRowCount * rowGap;
+        int platformRowCount = (int)(stageHeight/rowGap);
         float positionY = -(stageHeight / 2f) + rowGap;
         for (int i = 0; i < platformRowCount; i++)
         {
             platformRows.Add(Instantiate(platformRowPrefab, new Vector3(0,transform.position.y + positionY, 0), Quaternion.identity));
             platformRows[i].transform.SetParent(transform);
-            platformRows[i].createPlatform(((i) % 2 == 0) ? MOVE_DIRECTION.RIGHT : MOVE_DIRECTION.LEFT);
-            platformRows[i].setSpeed(speed);
+            platformRows[i].setLevel(this.stageLevel * 8 + i);
             positionY += rowGap;
         }
     }
 
-    public void setSpeed(float speed)
+    public void setStageLevel(int stageLevel)
     {
-        this.speed = speed;
+        this.stageLevel = stageLevel;
     }
-
-    public void destroyStage()
-    {
-        Destroy(this);
-    }    
 }

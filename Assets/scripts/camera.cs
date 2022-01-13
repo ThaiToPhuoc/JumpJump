@@ -12,8 +12,6 @@ public class camera : MonoBehaviour
 
     public float currentStage = 0f;
 
-    public int stageLevel = 0;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -29,10 +27,9 @@ public class camera : MonoBehaviour
             followCharacter();
         } 
 
-        if (transform.position.y > currentStage + Gamedata.instance.rowHeigth * 1.5f)
+        if (transform.position.y > currentStage + Gamedata.instance.stageHeigth)
         {
-            currentStage += Gamedata.instance.rowHeigth;
-            stageLevel++;
+            currentStage += Gamedata.instance.stageHeigth;
         }
     }
 
