@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   platforms: []
-  platformPrefab: {fileID: 3813298716030859015, guid: bae714129e5c05441b36c96dd635dd2b, type: 3}
+  platformPrefab: {fileID: 571910351738809994, guid: bae714129e5c05441b36c96dd635dd2b, type: 3}
   coinPrefab: {fileID: 8782101730396779476, guid: 71acc57cdacc9ab49a88c42d94e6d6a7, type: 3}
   sawPrefab: {fileID: 2212740145099773220, guid: 25263dc9568043943800e68043c8b77a, type: 3}
   wallPrefab: {fileID: 7778401639081306568, guid: 18da9e88fa72973479650f665ca130e4, type: 3}

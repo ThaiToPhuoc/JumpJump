@@ -26,9 +26,9 @@ public class gameplay : MonoBehaviour
     {
         if (camera.transform.position.y > currentPosition * Gamedata.instance.stageHeigth)
         {
-            currentStageLevel++;
             updateStage();
             currentPosition++;
+            currentStageLevel++;
         }
     }
 

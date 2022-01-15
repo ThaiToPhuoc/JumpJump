@@ -5,6 +5,30 @@ TextureImporter:
   - first:
       213: 4245123048664881678
     second: platform_0
+  - first:
+      213: -6389857941105234170
+    second: bar
+  - first:
+      213: 5588585546446269942
+    second: pauseButton
+  - first:
+      213: 6127974538032782226
+    second: coinIcon
+  - first:
+      213: 3836725587945801416
+    second: musicTurnOff
+  - first:
+      213: 7980853219166280902
+    second: musicTurnOn
+  - first:
+      213: 3303189428467558304
+    second: button
+  - first:
+      213: 8060847166058842764
+    second: facebookButton
+  - first:
+      213: 1504981112498394058
+    second: ranking
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -102,7 +126,7 @@ TextureImporter:
         width: 180
         height: 67
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -110,6 +134,174 @@ TextureImporter:
       bones: []
       spriteID: e0a5e7fcbe4b9ea30800000000000000
       internalID: 4245123048664881678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar
+      rect:
+        serializedVersion: 2
+        x: 894
+        y: 894
+        width: 120
+        height: 119
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60fa637be0aa257a0800000000000000
+      internalID: -6389857941105234170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pauseButton
+      rect:
+        serializedVersion: 2
+        x: 694
+        y: 934
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fdefc4e1f4ae8d40800000000000000
+      internalID: 5588585546446269942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coinIcon
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 922
+        width: 93
+        height: 94
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29b151cff50fa0550800000000000000
+      internalID: 6127974538032782226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: musicTurnOff
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 748
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c6492a2899ce3530800000000000000
+      internalID: 3836725587945801416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: musicTurnOn
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 747
+        width: 121
+        height: 121
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6cc50fce7bfa1ce60800000000000000
+      internalID: 7980853219166280902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: button
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 748
+        width: 387
+        height: 125
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a762adb84947dd20800000000000000
+      internalID: 3303189428467558304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: facebookButton
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 615
+        width: 388
+        height: 125
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8ac6a11ac1eddf60800000000000000
+      internalID: 8060847166058842764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranking
+      rect:
+        serializedVersion: 2
+        x: 499
+        y: 614
+        width: 119
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac3932c1954c2e410800000000000000
+      internalID: 1504981112498394058
       vertices: []
       indices: 
       edges: []

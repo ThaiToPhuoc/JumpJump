@@ -10,9 +10,9 @@ public class platformRow : MonoBehaviour
 {
     public float speed = 1f;
 
-    public List<Transform> platforms;
+    public List<platform> platforms;
 
-    public Transform platformPrefab;
+    public platform platformPrefab;
 
     public Transform coinPrefab;
 
@@ -41,6 +41,7 @@ public class platformRow : MonoBehaviour
         movingPlatform(speed);
     }
 
+    // Get Resolution
     public int ActualResolutionWidth(float orthoSize)
     {
         return (int)(orthoSize * 2.0 * (Screen.width * 1.0) / Screen.height * 100);
@@ -60,7 +61,9 @@ public class platformRow : MonoBehaviour
         {
             platforms.Add(Instantiate(platformPrefab, new Vector3(positionX, transform.position.y, 0), Quaternion.identity));
             platforms[i].transform.SetParent(transform);
+            platforms[i].setLevel(level);
             positionX += gap;
+            Debug.Log(this.level);
         }
         customPlatform();
 ;   }
@@ -90,9 +93,13 @@ public class platformRow : MonoBehaviour
 
     private float[,] getData()
     {
-        if (this.level < 30)
+        if (this.level < 20)
         {
-            return Gamedata.instance.levelData[this.level];
+            return Gamedata.instance.levelData[this.level % 10];
+        }
+        else if(this.level < 40)
+        {
+            return Gamedata.instance.levelData[10 + (this.level % 10)];
         }
         else
         {
@@ -107,36 +114,51 @@ public class platformRow : MonoBehaviour
         this.speed = Random.Range(data[r,0], data[r, 0] + 0.5f);
         this.gap = Random.Range(data[r, 1]/100 + 0.5f, data[r, 1] + 1f);
 
-        int Coin = Random.Range(-2, 3);
-        int Wall = Random.Range(-2, 3);
-        int Saw = Random.Range(-2, 3);
-        if(data[r,2] == 1)
+        var index = new List<int> {-2,-1,0,1,2};
+        var r2 = Random.Range(0, index.Count);
+        if(data[r,2] > 0)
         {
-            placeCoin(Coin);
+            for(int i = 0; i < data[r, 2]; i++)
+            {
+                placeCoin(index[r2]);
+                index.RemoveAt(r2);
+                r2 = Random.Range(0, index.Count);
+            }
         }
-        if (data[r, 3] == 1)
+        if (data[r, 3] > 0)
         {
-            placeWall(Wall);
+            for (int i = 0; i < data[r, 3]; i++)
+            {
+                placeWall(index[r2]);
+                index.RemoveAt(r2);
+                r2 = Random.Range(0, index.Count);
+            }
         }
-        if (data[r, 4] == 1)
+
+        if (data[r, 4] > 0)
         {
-            placeSaw(Saw);
+            for (int i = 0; i < data[r, 4]; i++)
+            {
+                placeSaw(index[r2]);
+                index.RemoveAt(r2);
+                r2 = Random.Range(0, index.Count);
+            }
         }
     }
 
     private void placeCoin(int Coin)
     {
-        Instantiate(coinPrefab, new Vector3(Coin * 1.5f, transform.position.y + 0.6f, 0), Quaternion.identity);
+        Instantiate(coinPrefab, new Vector3(Coin * 0.75f, transform.position.y + 0.6f, 0), Quaternion.identity);
     }
 
     private void placeSaw(int Saw)
     {
-        Instantiate(sawPrefab, new Vector3(Saw * 2.5f, transform.position.y + 0.6f, 0), Quaternion.identity);
+        Instantiate(sawPrefab, new Vector3(Saw * 1f, transform.position.y + 0.6f, 0), Quaternion.identity);
     }
 
     private void placeWall(int Wall)
     {
-        Instantiate(wallPrefab, new Vector3(Wall * 1.5f, transform.position.y + 0.6f, 0), Quaternion.identity);
+        Instantiate(wallPrefab, new Vector3(Wall * 0.75f, transform.position.y + 0.7f, 0), Quaternion.identity);
     }
     public void setLevel(int level)
     {

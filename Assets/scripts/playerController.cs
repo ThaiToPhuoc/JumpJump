@@ -77,6 +77,8 @@ public class playerController : MonoBehaviour{
             case STATE.JUMPING:
                 Jumping();
                 break;
+            case STATE.DEATH:
+                break;
         }
 
         //Flip
@@ -152,7 +154,7 @@ public class playerController : MonoBehaviour{
     {
         currentState = STATE.DEATH;
         setCharacterState(currentState);
-        Debug.Log("GAMEOVER!");
+        m_Rigidbody2D.bodyType = RigidbodyType2D.Static;
     }
     void onStartState()
     {
@@ -256,4 +258,16 @@ public class playerController : MonoBehaviour{
         return Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0f, Vector2.down, .1f, bottom);
     }
 
+    public void setCurrentState(STATE state)
+    {
+        this.currentState = state;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "Saw(Clone)")
+        {
+            gameover();
+        }
+    }
 }
