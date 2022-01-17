@@ -54,7 +54,7 @@ public class Gamedata : MonoBehaviour
         new float[,] { {3,240,0,2,1} , {3,250,1,0,2} , { 3,120,1,1,2}}
     };
 
-    public float score = 0, coins = 0, finalScore = 0, highScore = 0;
+    public int score = 0, coins = 0, finalScore = 0, highScore = 0;
 
     public int[] bonusLevel = new int[] {10,20,30,35,40,45,50,60,70,80,90,100};
     public int[] bonusScore = new int[] {5,5,10,5,10,15,20,20,20,25,25,50};

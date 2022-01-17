@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class gameplay : MonoBehaviour
 {
@@ -15,6 +17,12 @@ public class gameplay : MonoBehaviour
 
     public GameObject result;
 
+    public Button restartbtn;
+
+    public Text finalScore;
+
+    public Text highScore;
+
     private float positionY = 0f;
 
     private int currentPosition = 1;
@@ -24,6 +32,7 @@ public class gameplay : MonoBehaviour
     void Start()
     {
         createStages();
+        restartbtn.onClick.AddListener(restartscene);
     }
 
     // Update is called once per frame
@@ -45,7 +54,15 @@ public class gameplay : MonoBehaviour
         if(Gamedata.instance.gameover)
         {
             result.SetActive(true);
+            finalScore.text = Gamedata.instance.finalScore.ToString();
+            highScore.text = PlayerPrefs.GetInt("highScore").ToString();
+            Gamedata.instance.gameover = false;
         }
+    }
+
+    private void restartscene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void createStages()
@@ -81,4 +98,6 @@ public class gameplay : MonoBehaviour
         background3.sprite = spriteArray3[Gamedata.instance.backGroundIndex];
         Gamedata.instance.backGroundIndex++;
     }
+
+
 }

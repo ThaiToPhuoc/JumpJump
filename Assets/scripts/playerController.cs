@@ -161,6 +161,16 @@ public class playerController : MonoBehaviour{
         currentState = STATE.DEATH;
         setCharacterState(currentState);
         m_Rigidbody2D.bodyType = RigidbodyType2D.Static;
+
+        if(PlayerPrefs.GetInt("highScore") == null)
+        {
+            PlayerPrefs.SetInt("highScore", Gamedata.instance.finalScore);
+        }
+        else
+        {
+            if(Gamedata.instance.finalScore > PlayerPrefs.GetInt("highScore"))
+                PlayerPrefs.SetInt("highScore", Gamedata.instance.finalScore);
+        }
         Gamedata.instance.gameover = true;
     }
     void onStartState()
@@ -178,7 +188,7 @@ public class playerController : MonoBehaviour{
             moving = true;
         }
 
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown("space") || Input.GetMouseButtonDown(0))
         {
             jump = true;
             currentState = STATE.JUMPING;
@@ -207,7 +217,7 @@ public class playerController : MonoBehaviour{
             moving = false;
         }
 
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown("space") || Input.GetMouseButtonDown(0))
         {
             jump = true;
             moving = false;
