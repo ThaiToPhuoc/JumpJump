@@ -161,6 +161,7 @@ public class playerController : MonoBehaviour{
         currentState = STATE.DEATH;
         setCharacterState(currentState);
         m_Rigidbody2D.bodyType = RigidbodyType2D.Static;
+        Gamedata.instance.gameover = true;
     }
     void onStartState()
     {

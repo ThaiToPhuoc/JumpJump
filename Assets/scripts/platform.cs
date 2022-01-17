@@ -48,5 +48,10 @@ public class platform : MonoBehaviour
             Gamedata.instance.finalScore += Gamedata.instance.bonusScore[Gamedata.instance.bonusIndex];
             Gamedata.instance.bonusIndex++;
         }
+
+        if (this.level % 20 == 0 && this.level > 0)
+        {
+            Gamedata.instance.changeBG = true;
+        }
     }
 }

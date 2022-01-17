@@ -10,6 +10,11 @@ public class gameplay : MonoBehaviour
 
     public Transform camera;
 
+    public Sprite[] spriteArray0, spriteArray1, spriteArray2, spriteArray3;
+    public SpriteRenderer background0, background1, background2, background3;
+
+    public GameObject result;
+
     private float positionY = 0f;
 
     private int currentPosition = 1;
@@ -29,6 +34,17 @@ public class gameplay : MonoBehaviour
             updateStage();
             currentPosition++;
             currentStageLevel++;
+        }
+
+        if(Gamedata.instance.changeBG)
+        {
+            changeBackground();
+            Gamedata.instance.changeBG = false;
+        }
+
+        if(Gamedata.instance.gameover)
+        {
+            result.SetActive(true);
         }
     }
 
@@ -54,4 +70,15 @@ public class gameplay : MonoBehaviour
         positionY += Gamedata.instance.stageHeigth;
         Destroy(stage1.gameObject);
     }    
+
+    private void changeBackground()
+    {
+        if (Gamedata.instance.backGroundIndex > 4)
+            Gamedata.instance.backGroundIndex = 0;
+        background0.sprite = spriteArray0[Gamedata.instance.backGroundIndex];
+        background1.sprite = spriteArray1[Gamedata.instance.backGroundIndex];
+        background2.sprite = spriteArray2[Gamedata.instance.backGroundIndex];
+        background3.sprite = spriteArray3[Gamedata.instance.backGroundIndex];
+        Gamedata.instance.backGroundIndex++;
+    }
 }
