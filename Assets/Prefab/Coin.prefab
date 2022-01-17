@@ -160,4 +160,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animation: {fileID: 8782101730396779479}
-  collider: {fileID: 8782101730396779475}

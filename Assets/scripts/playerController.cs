@@ -41,6 +41,8 @@ public class playerController : MonoBehaviour{
 
     bool fall = false;
 
+    private float timeExtraScore = 0f;
+
     //Animation
 
     public AnimationReferenceAsset idle, start, walking, jumping, death;
@@ -95,6 +97,10 @@ public class playerController : MonoBehaviour{
 
             }
         }
+
+        //Count down Extra Score
+        if (timeExtraScore > 0)
+            timeExtraScore -= Time.deltaTime;
     }
 
     private void FixedUpdate()
@@ -182,6 +188,12 @@ public class playerController : MonoBehaviour{
         {
             gameover();
         }
+
+        if(Gamedata.instance.score > 40)
+        {
+            if (wallCollisionLeft() || wallCollisionRight())
+                gameover();
+        }    
     }
 
     void Walking()
@@ -205,6 +217,11 @@ public class playerController : MonoBehaviour{
         {
             gameover();
         }
+        if (Gamedata.instance.score > 40)
+        {
+            if (wallCollisionLeft() || wallCollisionRight())
+                gameover();
+        }
     }
 
     void Jumping()
@@ -224,6 +241,11 @@ public class playerController : MonoBehaviour{
         if (isDeath())
         {
             gameover();
+        }
+        if (Gamedata.instance.score > 40)
+        {
+            if (wallCollisionLeft() || wallCollisionRight())
+                gameover();
         }
     }
 
@@ -266,8 +288,20 @@ public class playerController : MonoBehaviour{
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.name == "Saw(Clone)")
-        {
             gameover();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "Coin(Clone)")
+        {
+            Gamedata.instance.coins++;
+            Gamedata.instance.finalScore++;
+
+            if (timeExtraScore > 0)
+                Gamedata.instance.finalScore += 10;
+
+            timeExtraScore = 10f;
         }
     }
 }

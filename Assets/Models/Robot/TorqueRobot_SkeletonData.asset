@@ -18,11 +18,13 @@ MonoBehaviour:
   skeletonJSON: {fileID: 4900000, guid: 64041a153293458438c3cb758dd14981, type: 3}
   isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
-    requiresBlendModeMaterials: 0
+    requiresBlendModeMaterials: 1
     applyAdditiveMaterial: 1
     additiveMaterials: []
     multiplyMaterials: []
-    screenMaterials: []
+    screenMaterials:
+    - pageName: TorqueRobot.png
+      material: {fileID: 2100000, guid: e8e3a80fcb3e00540a3ca50ceaaa0502, type: 2}
   skeletonDataModifiers: []
   fromAnimation: []
   toAnimation: []

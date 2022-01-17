@@ -18,9 +18,11 @@ MonoBehaviour:
   skeletonJSON: {fileID: 4900000, guid: f39c6025feb040a4c9633bd24b78f309, type: 3}
   isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
-    requiresBlendModeMaterials: 0
+    requiresBlendModeMaterials: 1
     applyAdditiveMaterial: 1
-    additiveMaterials: []
+    additiveMaterials:
+    - pageName: coinTorque.png
+      material: {fileID: 2100000, guid: d1700118e12e77e4fb34262591b5bb05, type: 2}
     multiplyMaterials: []
     screenMaterials: []
   skeletonDataModifiers: []

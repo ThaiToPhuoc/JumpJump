@@ -63,7 +63,6 @@ public class platformRow : MonoBehaviour
             platforms[i].transform.SetParent(transform);
             platforms[i].setLevel(level);
             positionX += gap;
-            Debug.Log(this.level);
         }
         customPlatform();
 ;   }
