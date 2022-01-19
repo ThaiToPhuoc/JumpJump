@@ -19,6 +19,8 @@ public class playerController : MonoBehaviour{
 
     public BoxCollider2D boxCollider2D;
 
+    public audioManager audio;
+
     //Layer
 
     public LayerMask ground;
@@ -61,6 +63,10 @@ public class playerController : MonoBehaviour{
             case "Start":
                 currentState = STATE.IDLE;
                 setCharacterState(currentState);
+                break;
+            case "Death1":
+                Gamedata.instance.gameover = true;
+                audio.VolumeChange("Background",0.4f);
                 break;
         }
     }
@@ -158,6 +164,7 @@ public class playerController : MonoBehaviour{
 
     void gameover()
     {
+        audio.Play("Death");
         currentState = STATE.DEATH;
         setCharacterState(currentState);
         m_Rigidbody2D.bodyType = RigidbodyType2D.Static;
@@ -171,7 +178,6 @@ public class playerController : MonoBehaviour{
             if(Gamedata.instance.finalScore > PlayerPrefs.GetInt("highScore"))
                 PlayerPrefs.SetInt("highScore", Gamedata.instance.finalScore);
         }
-        Gamedata.instance.gameover = true;
     }
     void onStartState()
     {
@@ -188,8 +194,9 @@ public class playerController : MonoBehaviour{
             moving = true;
         }
 
-        if (Input.GetKeyDown("space") || Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown("space"))
         {
+            audio.Play("Jump");
             jump = true;
             currentState = STATE.JUMPING;
         }
@@ -217,7 +224,7 @@ public class playerController : MonoBehaviour{
             moving = false;
         }
 
-        if (Input.GetKeyDown("space") || Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown("space"))
         {
             jump = true;
             moving = false;
@@ -306,6 +313,7 @@ public class playerController : MonoBehaviour{
     {
         if (collision.gameObject.name == "Coin(Clone)")
         {
+            audio.Play("Coin");
             Gamedata.instance.coins++;
             Gamedata.instance.finalScore++;
 

@@ -54,6 +54,7 @@ public class platformRow : MonoBehaviour
 
     public void createPlatform()
     {
+        customPlatform();
         int platformCount = (int)(rowWidth / gap) + 3;
         rowWidth = platformCount * gap;
         float positionX = - rowWidth / 2f;
@@ -64,7 +65,6 @@ public class platformRow : MonoBehaviour
             platforms[i].setLevel(level);
             positionX += gap;
         }
-        customPlatform();
 ;   }
 
     private void movingPlatform(float speed)
@@ -110,8 +110,8 @@ public class platformRow : MonoBehaviour
     {
         var data = getData();
         int r = Random.Range(0, 3);
-        this.speed = Random.Range(data[r,0], data[r, 0] + 0.5f);
-        this.gap = Random.Range(data[r, 1]/100 + 0.5f, data[r, 1] + 1f);
+        this.gap = Random.Range(data[r, 1] / 100 + 0.2f, data[r, 1] / 100 + 0.5f);
+        this.speed = Random.Range(data[r,0], data[r, 0] + 0.6f);
 
         var index = new List<int> {-2,-1,0,1,2};
         var r2 = Random.Range(0, index.Count);
@@ -147,7 +147,7 @@ public class platformRow : MonoBehaviour
 
     private void placeCoin(int Coin)
     {
-        Instantiate(coinPrefab, new Vector3(Coin * 0.75f, transform.position.y + 0.6f, 0), Quaternion.identity);
+        Instantiate(coinPrefab, new Vector3(Coin * 0.85f, transform.position.y + 0.6f, 0), Quaternion.identity);
     }
 
     private void placeSaw(int Saw)
@@ -157,7 +157,7 @@ public class platformRow : MonoBehaviour
 
     private void placeWall(int Wall)
     {
-        Instantiate(wallPrefab, new Vector3(Wall * 0.75f, transform.position.y + 0.7f, 0), Quaternion.identity);
+        Instantiate(wallPrefab, new Vector3(Wall * 0.85f, transform.position.y + 0.7f, 0), Quaternion.identity);
     }
     public void setLevel(int level)
     {

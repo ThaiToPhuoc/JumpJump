@@ -17,8 +17,7 @@ public class gameplay : MonoBehaviour
 
     public GameObject result;
 
-    public Button restartbtn;
-
+    public static bool isPaused = false;
     public Text finalScore;
 
     public Text highScore;
@@ -32,7 +31,6 @@ public class gameplay : MonoBehaviour
     void Start()
     {
         createStages();
-        restartbtn.onClick.AddListener(restartscene);
     }
 
     // Update is called once per frame
@@ -58,11 +56,6 @@ public class gameplay : MonoBehaviour
             highScore.text = PlayerPrefs.GetInt("highScore").ToString();
             Gamedata.instance.gameover = false;
         }
-    }
-
-    private void restartscene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void createStages()
