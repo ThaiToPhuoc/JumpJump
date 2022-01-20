@@ -110,7 +110,7 @@ public class platformRow : MonoBehaviour
     {
         var data = getData();
         int r = Random.Range(0, 3);
-        this.gap = Random.Range(data[r, 1] / 100 + 0.2f, data[r, 1] / 100 + 0.5f);
+        this.gap = Random.Range(data[r, 1] / 100 + 0.1f, data[r, 1] / 100 + 0.3f);
         this.speed = Random.Range(data[r,0], data[r, 0] + 0.6f);
 
         var index = new List<int> {-2,-1,0,1,2};

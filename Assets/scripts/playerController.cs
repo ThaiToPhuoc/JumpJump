@@ -194,7 +194,7 @@ public class playerController : MonoBehaviour{
             moving = true;
         }
 
-        if (Input.GetKeyDown("space"))
+        if (Input.GetMouseButtonDown(0) && (currentState == STATE.IDLE || currentState == STATE.WALKING))
         {
             audio.Play("Jump");
             jump = true;

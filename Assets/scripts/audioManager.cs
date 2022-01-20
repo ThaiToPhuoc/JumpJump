@@ -15,7 +15,6 @@ public class audioManager : MonoBehaviour
 
     private void Start()
     {
-        DontDestroyOnLoad(gameObject);
 
         foreach (Sound s in sounds)
         {
